@@ -1,6 +1,5 @@
 const express = require('express')
 const next = require('next')
-const { default: createServer } = require('next/dist/server/next')
 const vhost = require('vhost')
 
 const port = process.env.PORT || 3000
