@@ -12,7 +12,7 @@ const Layout = ({ user, loading = false, children }) => (
     <Header />
 
     <main>
-      <div className="container mx-auto">{children}</div>
+      <div className="container mx-auto my-5">{children}</div>
     </main>
   </UserProvider>
 );
