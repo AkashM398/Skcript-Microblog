@@ -3,7 +3,7 @@ import Providers from "next-auth/providers";
 
 const options = {
   cookies: {
-    domain: ".makemicroblog.ml",
+    domain: "*.makemicroblog.ml",
     subdomains:true
   },
   providers: [
