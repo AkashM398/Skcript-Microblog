@@ -1,15 +1,11 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 
-
-const useSecureCookies = process.env.NEXTAUTH_URL.startsWith('https://')
-const cookiePrefix = useSecureCookies ? '__Secure-' : ''
-const hostName = Url(process.env.NEXTAUTH_URL).hostname
 const options = {
-  cookies: {
-    domain: ".makemicroblog.ml",
-    subdomains:true
-  },
+  // cookies: {
+  //   domain: ".makemicroblog.ml",
+  //   subdomains:true
+  // },
   providers: [
     Providers.GitHub({
       clientId: process.env.GITHUB_ID,
