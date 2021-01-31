@@ -14,8 +14,7 @@ const options = {
         httpOnly: true,
         sameSite: 'lax',
         path: '/',
-        secure: useSecureCookies,
-        domain: hostName == 'localhost' ? hostName : '.' + hostName // add a . in front so that subdomains are included
+        secure: true
       }
     },
   },
