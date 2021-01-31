@@ -7,16 +7,8 @@ const cookiePrefix = useSecureCookies ? '__Secure-' : ''
 const hostName = Url(process.env.NEXTAUTH_URL).hostname
 const options = {
   cookies: {
-    sessionToken: 
-    {
-      name: `${cookiePrefix}next-auth.session-token`,
-      options: {
-        httpOnly: true,
-        sameSite: 'lax',
-        path: '/',
-        secure: true
-      }
-    },
+    domain: ".makemicroblog.ml",
+    subdomains:true
   },
   providers: [
     Providers.GitHub({
