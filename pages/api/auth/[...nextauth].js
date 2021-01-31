@@ -30,19 +30,6 @@ const options = {
   pages: {
     signIn: "/signin",
   },
-  cookies: {
-    sessionToken: 
-    {
-      name: `${cookiePrefix}next-auth.session-token`,
-      options: {
-        httpOnly: true,
-        sameSite: 'lax',
-        path: '/',
-        secure: true,
-        domain: hostName == 'localhost' ? hostName : '.' + hostName // add a . in front so that subdomains are included
-      }
-    },
-  },
 };
 
 export default (req, res) => NextAuth(req, res, options);
