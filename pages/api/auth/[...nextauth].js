@@ -1,6 +1,10 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 
+
+const useSecureCookies = process.env.NEXTAUTH_URL.startsWith('http://')
+const cookiePrefix = useSecureCookies ? '__Secure-' : ''
+const hostName = Url(process.env.NEXTAUTH_URL).hostname
 const options = {
   cookies: {
     sessionToken: 
