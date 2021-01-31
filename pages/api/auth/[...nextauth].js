@@ -2,10 +2,10 @@ import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 
 const options = {
-  // cookies: {
-  //   domain: ".makemicroblog.ml",
-  //   subdomains:true
-  // },
+  cookies: {
+    domain: ".makemicroblog.ml",
+    subdomains:true
+  },
   providers: [
     Providers.GitHub({
       clientId: process.env.GITHUB_ID,
