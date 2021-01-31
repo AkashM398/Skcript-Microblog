@@ -6,19 +6,6 @@ const cookiePrefix = useSecureCookies ? '__Secure-' : ''
 const hostName = Url(process.env.NEXTAUTH_URL).hostname
 
 const options = {
-  cookies: {
-    sessionToken: 
-    {
-      name: `${cookiePrefix}next-auth.session-token`,
-      options: {
-        httpOnly: true,
-        sameSite: 'lax',
-        path: '/',
-        secure: true,
-        domain: hostName == 'localhost' ? hostName : '.' + hostName // add a . in front so that subdomains are included
-      }
-    },
-  },
   providers: [
     Providers.GitHub({
       clientId: process.env.GITHUB_ID,
@@ -42,6 +29,19 @@ const options = {
   ],
   pages: {
     signIn: "/signin",
+  },
+  cookies: {
+    sessionToken: 
+    {
+      name: `${cookiePrefix}next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: true,
+        domain: hostName == 'localhost' ? hostName : '.' + hostName // add a . in front so that subdomains are included
+      }
+    },
   },
 };
 
