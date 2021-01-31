@@ -37,7 +37,7 @@ export default function SignIn({ providers, csrfToken }) {
                   <div key={provider.name}>
                     <button
                       type="button"
-                      onClick={() => signIn(provider.id, {callbackUrl: 'http://makemicroblog.ml'})}
+                      onClick={() => signIn(provider.id, {callbackUrl: 'https://makemicroblog.ml'})}
                       className="transition duration-200 border border-gray-200 text-gray-500 w-full py-2.5 rounded-md text-sm shadow-sm hover:shadow-md font-normal text-center inline-block"
                     >
                       {provider.name}
