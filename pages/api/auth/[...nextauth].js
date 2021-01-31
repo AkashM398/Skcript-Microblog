@@ -2,6 +2,19 @@ import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 
 const options = {
+  cookies: {
+    sessionToken: 
+    {
+      name: `${cookiePrefix}next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: useSecureCookies,
+        domain: hostName == 'localhost' ? hostName : '.' + hostName // add a . in front so that subdomains are included
+      }
+    },
+  },
   providers: [
     Providers.GitHub({
       clientId: process.env.GITHUB_ID,
