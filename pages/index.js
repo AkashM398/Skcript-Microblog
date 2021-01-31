@@ -1,37 +1,45 @@
-import React from 'react';
-
+import Head from "next/head";
+import React from "react";
+import {useSession } from "next-auth/client";
 import Layout from '../components/layout';
-import { useFetchUser } from '../lib/user';
 
 export default function Home() {
-  const { user, loading } = useFetchUser();
-
+  const [session, loading] = useSession();
   return (
-    <Layout user={user} loading={loading}>
-      <h1 className="text-center font-bold my-5">This is a Microblog Application</h1>
+    <div className="container mx-auto">
+      <Head>
+        <title>Auth Examples</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
-      {loading && (
-        <p className="text-center">
-          Loading login info...
-        </p>
-      )}
+      <Layout session={session} loading={loading}>
+        <h1 className="text-center font-bold my-5">
+          This is a Microblog Application
+        </h1>
 
-      {!loading && !user && (
-        <>
-          <p className="text-center">
-            <i>Login</i> to check out the app
-          </p>
-          <pre className="text-center my-5">email: test@gmail.com<br/>password: test@123</pre>
-        </>
-      )}
+        {loading && <p className="text-center">Loading login info...</p>}
 
-      {user && (
-        <>
-          <div className="container">
-            <h4 className="text-center">Rendered user info on the client</h4>
-          </div>
-        </>
-      )}
-    </Layout>
-  )
-};
+        {!loading && !session && (
+          <>
+            <p className="text-center">
+              <i>Login</i> to check out the app
+            </p>
+            <pre className="text-center my-5">
+              email: test@gmail.com
+              <br />
+              password: test@123
+            </pre>
+          </>
+        )}
+
+        {session && (
+          <>
+            <div className="container">
+              <h4 className="text-center">Rendered user info on the client</h4>
+            </div>
+          </>
+        )}
+      </Layout>
+    </div>
+  );
+}

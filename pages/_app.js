@@ -1,9 +1,14 @@
- import'../styles/globals.css';
+import "../styles/globals.css";
+import { Provider } from "next-auth/client";
 
- export default function MyApp({ Component, pageProps }) {
-     return (
-         <div className="container mx-auto">
-             <Component {...pageProps}/>
-         </div>
-     )
- } 
+function MyApp({ Component, pageProps }) {
+  return (
+    <Provider session={pageProps.session}>
+      <div className="w-full">
+        <Component {...pageProps} />
+      </div>
+    </Provider>
+  );
+}
+
+export default MyApp;

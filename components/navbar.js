@@ -1,33 +1,28 @@
 import Link from 'next/link';
-import { useUser } from '../lib/user';
+import { signIn, signOut} from "next-auth/client";
 
-const Header = () => {
-  const { user, loading } = useUser();
-
+const Navbar = ({session, loading = false}) => {
   return (
     <header>
-      <nav className="flex justify-between items-center bg-gray-50 p-3 rounded-md mb-10">
+      <nav className="flex justify-between items-center bg-gray-500 p-3 rounded-md mb-10">
         <p className="text-2xl font-sans font-bold text-gray-800">
           <Link href="/">
             <a>Microblog</a>
           </Link>
         </p>
         <div className="flex">
-          {!loading &&
-            (user ? (
+          {!loading && 
+            (session ? (
               <>
-                <a class="rounded-md bg-gray-700 text-white py-1 px-3">
-                  <a href="/api/logout">Logout</a>
-                </a>
+                <button className="rounded-md bg-gray-700 text-white py-1 px-3" onClick={signOut}>
+                  Logout
+                </button>
               </>
             ) : (
               <>
-                <a class="rounded-md bg-gray-700 text-white py-1 px-3 mx-2">
-                  <a href="/api/register">Register</a>
-                </a>
-                <a class="rounded-md bg-gray-700 text-white py-1 px-3">
-                  <a href="/api/login">Login</a>
-                </a>
+                <button className="rounded-md bg-gray-700 text-white py-1 px-3" onClick={signIn}>
+                    Login
+                </button>
               </>
             ))}
         </div>
@@ -36,4 +31,4 @@ const Header = () => {
   );
 }
 
-export default Header;
+export default Navbar;

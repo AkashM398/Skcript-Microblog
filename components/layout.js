@@ -1,20 +1,18 @@
 import Head from 'next/head';
+import Navbar from './navbar';
 
-import Header from './navbar';
-import { UserProvider, useUser } from '../lib/user';
-
-const Layout = ({ user, loading = false, children }) => (
-  <UserProvider value={{ user, loading }}>
+const Layout = ({session, loading = false, children}) => (
+  <>
     <Head>
       <title>Microblog App</title>
     </Head>
 
-    <Header />
+    <Navbar session={session} loading={loading}/>
 
     <main>
       <div className="container mx-auto my-5">{children}</div>
     </main>
-  </UserProvider>
+  </>
 );
 
 export default Layout;
