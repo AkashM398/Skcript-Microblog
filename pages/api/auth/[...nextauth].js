@@ -39,18 +39,42 @@ const options = {
   //   signIn: "/signin",
   // },
   cookies: {
-    sessionToken: 
-    {
-      name: `${cookiePrefix}next-auth.session-token`,
+    sessionToken: {
+      name: `__Secure-next-auth.session-token`,
       options: {
         httpOnly: true,
         sameSite: 'lax',
         path: '/',
-        secure: useSecureCookies,
-        domain: hostName == 'localhost' ? hostName : '.' + hostName // add a . in front so that subdomains are included
+        secure: true
       }
     },
-  },
+    callbackUrl: {
+      name: `__Secure-next-auth.callback-url`,
+      options: {
+        sameSite: 'lax',
+        path: '/',
+        secure: true
+      }
+    },
+    csrfToken: {
+      name: `__Host-next-auth.csrf-token`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: true
+      }
+    },
+    pkceCodeVerifier: {
+      name: `${cookiePrefix}next-auth.pkce.code_verifier`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: useSecureCookies
+      }
+    }
+  }
   
 };
 
