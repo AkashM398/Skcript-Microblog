@@ -41,6 +41,7 @@ const options = {
   cookies: {
     sessionToken: {
       name: `__Secure-next-auth.session-token`,
+      domain: 'auth.makemicroblog.ml',
       options: {
         httpOnly: true,
         sameSite: 'lax',
@@ -48,32 +49,7 @@ const options = {
         secure: true
       }
     },
-    callbackUrl: {
-      name: `__Secure-next-auth.callback-url`,
-      options: {
-        sameSite: 'lax',
-        path: '/',
-        secure: true
-      }
-    },
-    csrfToken: {
-      name: `__Host-next-auth.csrf-token`,
-      options: {
-        httpOnly: true,
-        sameSite: 'lax',
-        path: '/',
-        secure: true
-      }
-    },
-    pkceCodeVerifier: {
-      name: `${cookiePrefix}next-auth.pkce.code_verifier`,
-      options: {
-        httpOnly: true,
-        sameSite: 'lax',
-        path: '/',
-        secure: useSecureCookies
-      }
-    }
+    
   }
   
 };
