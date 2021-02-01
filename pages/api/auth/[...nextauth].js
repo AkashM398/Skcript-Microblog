@@ -39,19 +39,18 @@ const options = {
   //   signIn: "/signin",
   // },
   cookies: {
-    sessionToken: {
-      name: `__Secure-next-auth.session-token`,
-      domain: 'auth.makemicroblog.ml',
+    sessionToken: 
+    {
+      name: `${cookiePrefix}next-auth.session-token`,
       options: {
         httpOnly: true,
         sameSite: 'lax',
         path: '/',
-        secure: true
+        secure: useSecureCookies,
+        domain: hostName == 'localhost' ? hostName : '.' + hostName // add a . in front so that subdomains are included
       }
     },
-    
-  }
-  
+  },  
 };
 
 export default (req, res) => NextAuth(req, res, options);
