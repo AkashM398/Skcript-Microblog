@@ -1,9 +1,9 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 
-const useSecureCookies = process.env.NEXTAUTH_URL.startsWith('https://')
-const cookiePrefix = useSecureCookies ? '__Secure-' : ''
-const hostName = Url(process.env.NEXTAUTH_URL).hostname
+const isCorrectCredentials = (credentials) =>
+  credentials.username === process.env.NEXTAUTH_USERNAME &&
+  credentials.password === process.env.NEXTAUTH_PASSWORD;
 
 const options = {
   providers: [
@@ -15,21 +15,26 @@ const options = {
       clientId: process.env.TWITTER_ID,
       clientSecret: process.env.TWITTER_SECRET,
     }),
-    Providers.Email({
-      server: {
-        host: process.env.EMAIL_SERVER_HOST,
-        port: process.env.EMAIL_SERVER_PORT,
-        auth: {
-          user: process.env.EMAIL_SERVER_USER,
-          pass: process.env.EMAIL_SERVER_PASSWORD,
-        },
+    Providers.Credentials({
+      name: 'credentials',
+      credentials: {
+        username: { label: 'Username', type: 'text', placeholder: 'jsmith' },
+        password: { label: 'Password', type: 'password' },
       },
-      from: process.env.EMAIL_FROM,
+      authorize: async (credentials) => {
+        if (isCorrectCredentials(credentials)) {
+          const user = { id: 1, name: 'Admin' };
+          return Promise.resolve(user);
+        } else {
+          return Promise.resolve(null);
+        }
+      },
     }),
   ],
-  pages: {
-    signIn: "/signin",
-  },
+  // pages: {
+  //   signIn: "/signin",
+  // },
+  
 };
 
 export default (req, res) => NextAuth(req, res, options);

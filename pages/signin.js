@@ -8,15 +8,24 @@ export default function SignIn({ providers, csrfToken }) {
         <h1 className="font-bold text-center text-2xl mb-5">Microblog App</h1>
         <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
           <div className="px-5 py-7">
-            <form method="post" action="/api/auth/signin/email">
+            <form method="post" action="/api/auth/signin/credentials">
               <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
               <label className="font-semibold text-sm text-gray-600 pb-1 block">
                 E-mail
               </label>
               <input
                 type="text"
-                id="email"
-                name="email"
+                id="username"
+                name="username"
+                className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
+              />
+              <label className="font-semibold text-sm text-gray-600 pb-1 block">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
                 className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
               />
               <button
@@ -37,7 +46,7 @@ export default function SignIn({ providers, csrfToken }) {
                   <div key={provider.name}>
                     <button
                       type="button"
-                      onClick={() => signIn(provider.id, {callbackUrl: 'https://makemicroblog.ml'})}
+                      onClick={() => signIn(provider.id, {callbackUrl: 'http://localhost:3000'})}
                       className="transition duration-200 border border-gray-200 text-gray-500 w-full py-2.5 rounded-md text-sm shadow-sm hover:shadow-md font-normal text-center inline-block"
                     >
                       {provider.name}
