@@ -55,3 +55,4 @@ export async function getServerSideProps({ req, res }) {
       host: req.headers.host
     }
   };
+}
