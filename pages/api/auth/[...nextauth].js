@@ -47,7 +47,7 @@ const options = {
         sameSite: 'lax',
         path: '/',
         secure: useSecureCookies,
-        domain: auth.makemicroblog.ml,
+        domain: "auth.makemicroblog.ml",
       }
     },
   },  
