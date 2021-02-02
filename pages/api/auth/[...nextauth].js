@@ -1,9 +1,9 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 
-const useSecureCookies = process.env.NEXTAUTH_URL.startsWith('https://')
-const cookiePrefix = useSecureCookies ? '__Secure-' : ''
-const hostName = Url(process.env.NEXTAUTH_URL).hostname
+// const useSecureCookies = process.env.NEXTAUTH_URL.startsWith('https://')
+// const cookiePrefix = useSecureCookies ? '__Secure-' : ''
+// const hostName = Url(process.env.NEXTAUTH_URL).hostname
 
 const isCorrectCredentials = (credentials) =>
   credentials.username === process.env.NEXTAUTH_USERNAME &&
@@ -38,19 +38,19 @@ const options = {
   // pages: {
   //   signIn: "/signin",
   // },
-  cookies: {
-    sessionToken: 
-    {
-      name: `${cookiePrefix}next-auth.session-token`,
-      options: {
-        httpOnly: true,
-        sameSite: 'lax',
-        path: '/',
-        secure: useSecureCookies,
-        domain: "auth.makemicroblog.ml",
-      }
-    },
-  },  
+  // cookies: {
+  //   sessionToken: 
+  //   {
+  //     name: `${cookiePrefix}next-auth.session-token`,
+  //     options: {
+  //       httpOnly: true,
+  //       sameSite: 'lax',
+  //       path: '/',
+  //       secure: useSecureCookies,
+  //       domain: "auth.makemicroblog.ml",
+  //     }
+  //   },
+  // },  
 };
 
 export default (req, res) => NextAuth(req, res, options);
