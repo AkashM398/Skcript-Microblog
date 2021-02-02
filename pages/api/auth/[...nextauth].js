@@ -18,7 +18,7 @@ const options = {
     Providers.Credentials({
       name: 'credentials',
       credentials: {
-        username: { label: 'Username', type: 'text', placeholder: 'jsmith' },
+        username: { label: 'Username', type: 'text', placeholder: 'admin' },
         password: { label: 'Password', type: 'password' },
       },
       authorize: async (credentials) => {

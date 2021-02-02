@@ -25,9 +25,9 @@ export default function Home() {
               <i>Login</i> to check out the app
             </p>
             <pre className="text-center my-5">
-              email: test@gmail.com
+              email: admin
               <br />
-              password: test@123
+              password: admin
             </pre>
           </>
         )}
