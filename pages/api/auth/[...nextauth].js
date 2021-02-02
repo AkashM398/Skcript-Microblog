@@ -47,7 +47,7 @@ const options = {
         sameSite: 'lax',
         path: '/',
         secure: useSecureCookies,
-        domain: hostName == 'makemicroblog.ml' ? hostName : '.' + hostName // add a . in front so that subdomains are included
+        domain: auth.makemicroblog.ml,
       }
     },
   },  
