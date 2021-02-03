@@ -1,9 +1,11 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
+import jwt from 'next-auth/jwt';
 
-// const useSecureCookies = process.env.NEXTAUTH_URL.startsWith('https://')
-// const cookiePrefix = useSecureCookies ? '__Secure-' : ''
-// const hostName = Url(process.env.NEXTAUTH_URL).hostname
+const secret = process.env.JWT_SECRET
+
+const useSecureCookies = process.env.NEXTAUTH_URL.startsWith('https://')
+const cookiePrefix = useSecureCookies ? '__Secure-' : ''
 
 const isCorrectCredentials = (credentials) =>
   credentials.username === process.env.NEXTAUTH_USERNAME &&
@@ -38,19 +40,29 @@ const options = {
   // pages: {
   //   signIn: "/signin",
   // },
-  // cookies: {
-  //   sessionToken: 
-  //   {
-  //     name: `${cookiePrefix}next-auth.session-token`,
-  //     options: {
-  //       httpOnly: true,
-  //       sameSite: 'lax',
-  //       path: '/',
-  //       secure: useSecureCookies,
-  //       domain: "auth.makemicroblog.ml",
-  //     }
-  //   },
-  // },  
+  session: {
+    jwt: true,
+  },
+  jwt: {
+    encryption: true,
+    secret: process.env.JWT_SECRET,
+    signingKey: process.env.JWT_SIGNING_KEY,
+    encryptionKey: process.env.JWT_ENCRYPTION_KEY,
+ },
+  
+  cookies: {
+    sessionToken: 
+    {
+      name: `${cookiePrefix}next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: useSecureCookies,
+        domain: "login.localhost:3000",
+      }
+    },
+  },  
 };
 
 export default (req, res) => NextAuth(req, res, options);
