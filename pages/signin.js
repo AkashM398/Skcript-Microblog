@@ -8,7 +8,7 @@ export default function SignIn({ providers, csrfToken }) {
         <h1 className="font-bold text-center text-2xl mb-5">Microblog App</h1>
         <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
           <div className="px-5 py-7">
-            <form method="post" action="/api/auth/signin/credentials">
+            <form method="post" action="/api/auth/callback/credentials">
               <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
               <label className="font-semibold text-sm text-gray-600 pb-1 block">
                 E-mail
@@ -37,23 +37,42 @@ export default function SignIn({ providers, csrfToken }) {
             </form>
           </div>
           <div className="p-5">
+            <div className="mb-5">
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-300"></div>
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-2 bg-white text-gray-500">
+                    Or Signin with
+                  </span>
+                </div>
+              </div>
+            </div>
+
             <div className="grid grid-cols-2 gap-3">
-              {Object.values(providers).map((provider) => {
-                if (provider.name === "Email") {
-                  return;
+              <button
+                type="button"
+                onClick={() =>
+                  signIn("github", {
+                    callbackUrl: "http://makemicroblog.ml:3000",
+                  })
                 }
-                return (
-                  <div key={provider.name}>
-                    <button
-                      type="button"
-                      onClick={() => signIn(provider.id, {callbackUrl: 'http://localhost:3000'})}
-                      className="transition duration-200 border border-gray-200 text-gray-500 w-full py-2.5 rounded-md text-sm shadow-sm hover:shadow-md font-normal text-center inline-block"
-                    >
-                      {provider.name}
-                    </button>
-                  </div>
-                );
-              })}
+                className="transition duration-200 border border-gray-200 bg-gray-700 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-normal text-center inline-block"
+              >
+                GitHub
+              </button>
+              <button
+                type="button"
+                onClick={() =>
+                  signIn("facebook", {
+                    callbackUrl: "http://makemicroblog.ml:3000",
+                  })
+                }
+                className="transition duration-200 border border-gray-200 bg-gray-700 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-normal text-center inline-block"
+              >
+                Facebook
+              </button>
             </div>
           </div>
         </div>

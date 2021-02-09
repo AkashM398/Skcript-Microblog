@@ -1,11 +1,6 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
-import jwt from 'next-auth/jwt';
-
-const secret = process.env.JWT_SECRET
-
-const useSecureCookies = process.env.NEXTAUTH_URL.startsWith('https://')
-const cookiePrefix = useSecureCookies ? '__Secure-' : ''
+// import jwt from 'next-auth/jwt';
 
 const isCorrectCredentials = (credentials) =>
   credentials.username === process.env.NEXTAUTH_USERNAME &&
@@ -30,39 +25,24 @@ const options = {
       authorize: async (credentials) => {
         if (isCorrectCredentials(credentials)) {
           const user = { id: 1, name: 'Admin' };
-          return Promise.resolve(user);
+          return user;
         } else {
-          return Promise.resolve(null);
+          return null;
         }
       },
     }),
   ],
-  // pages: {
-  //   signIn: "/signin",
-  // },
-  session: {
-    jwt: true,
+  pages: {
+    signIn: "/signin",
   },
-  jwt: {
-    encryption: true,
-    secret: process.env.JWT_SECRET,
-    signingKey: process.env.JWT_SIGNING_KEY,
-    encryptionKey: process.env.JWT_ENCRYPTION_KEY,
- },
   
-  cookies: {
-    sessionToken: 
-    {
-      name: `${cookiePrefix}next-auth.session-token`,
-      options: {
-        httpOnly: true,
-        sameSite: 'lax',
-        path: '/',
-        secure: useSecureCookies,
-        domain: "login.localhost:3000",
-      }
-    },
-  },  
+ cookies: {
+  sessionToken: {
+    options: {
+      domain: ".makemicroblog.ml"
+    }
+  }
+ }
 };
 
 export default (req, res) => NextAuth(req, res, options);

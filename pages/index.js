@@ -5,6 +5,7 @@ import Layout from '../components/layout';
 
 export default function Home() {
   const [session, loading] = useSession();
+
   return (
     <div className="container mx-auto">
       <Head>
