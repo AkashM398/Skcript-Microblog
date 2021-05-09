@@ -55,7 +55,7 @@ export default function SignIn({ providers, csrfToken }) {
                 type="button"
                 onClick={() =>
                   signIn("github", {
-                    callbackUrl: "http://makemicroblog.ml:3000",
+                    callbackUrl: "http://letme.study:3000",
                   })
                 }
                 className="transition duration-200 border border-gray-200 bg-gray-700 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-normal text-center inline-block"
@@ -66,7 +66,7 @@ export default function SignIn({ providers, csrfToken }) {
                 type="button"
                 onClick={() =>
                   signIn("facebook", {
-                    callbackUrl: "http://makemicroblog.ml:3000",
+                    callbackUrl: "http://letme.study:3000",
                   })
                 }
                 className="transition duration-200 border border-gray-200 bg-gray-700 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-normal text-center inline-block"

@@ -39,7 +39,7 @@ const options = {
  cookies: {
   sessionToken: {
     options: {
-      domain: ".makemicroblog.ml"
+      domain: ".letme.study"
     }
   }
  }
